@@ -11,20 +11,21 @@ html(class='no-js')
 
     link(rel='stylesheet', href='static/css/normalize.css')
     link(rel='stylesheet', href='static/css/main.css')
-    script(src='js/vendor/modernizr-2.6.2.min.js')
     body
-        h1 Boo Bear
-        h2 Possibly the best dog.
-        block content
+        .container
+            header
+                h1 OMG PUPS
+                h2 I can't even.
+            block content
         //if lt IE 8
           p.chromeframe.
             You are using an <strong>outdated</strong> browser.
             Please <a href="http://browsehappy.com/">upgrade your browser</a>
             to improve your experience.
-        footer
-            ul
-                li link
-                li link
-                li link
+        //- footer
+        //-     ul
+        //-         li link
+        //-         li link
+        //-         li link
 
     script(src='static/js/main.js')
