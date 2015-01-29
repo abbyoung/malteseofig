@@ -41,20 +41,14 @@ Gallery = function(json) {
   self.json = json;
 
   self.overlayBackground.onclick = function(){
-    self.overlay.className = 'close-photo';
-    self.overlayBackground.className = 'close-photo';
-    self.overlay.style.display = 'none';
-    self.overlayBackground.style.display = 'none';
+    self.close();
 
   };
 
   // close button
   document.getElementById('close').onclick = function(e){
     e.preventDefault();
-    self.overlay.className = 'close-photo';
-    self.overlayBackground.className = 'close-photo';
-    self.overlay.style.display = 'none';
-    self.overlayBackground.style.display='none';
+    self.close();
   };
 
   for (var i=0; i<json.data.length; i++) {
@@ -79,10 +73,21 @@ Gallery = function(json) {
 
 };
 
+Gallery.prototype.close = function() {
+  var self = this;
+
+  self.overlay.style.display = 'none';
+  self.overlayBackground.style.display = 'none';
+  document.body.className = '';
+
+}
+
 Gallery.prototype.open = function(index) {
   var self = this;
 
   self.overlay.className = 'open-photo';
+  document.body.className = 'noscroll';
+
   
   self.prev.onclick = function(e){
     e.preventDefault();
@@ -118,12 +123,20 @@ Gallery.prototype.open = function(index) {
   }
 
   // show standard size photo in gallery
-  self.fullSize.src = "";
-  self.fullSize.src = self.json.data[index].images.standard_resolution.url;
+  var preload = new Image();
+  preload.src = self.json.data[index].images.standard_resolution.url;
+  if (!preload.complete) {
+    self.fullSize.style.visibility = 'hidden';
+    preload.onload = function(){
+      self.fullSize.src = preload.src;
+      self.fullSize.style.visibility = 'visible';
+    };    
+  } else {
+      self.fullSize.src = preload.src;    
+  }
+
   self.overlay.style.display = 'block';
   self.overlayBackground.style.display='block';
-
-
 };
 
 window.onload = function(){
@@ -135,7 +148,7 @@ window.onload = function(){
         new Gallery(json);
     },
     onTimeout: function(){
-        window.onload; // best way to retry? or just error message?
+        alert('Whoops! Try again, plz.')
     },
     timeout: 5
   });

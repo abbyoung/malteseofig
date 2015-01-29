@@ -103,10 +103,7 @@ body {
 h1, h2, h3 {
     color: #2f3f43;
 }
-.container {
-    width: 920px;
-    margin: 0 auto;
-}
+
 #overlayBackground {
     height: 100%;
     width: 100%;
@@ -124,13 +121,14 @@ header {
 
 /*Gallery Styling*/
 .gallery {
+    text-align: center;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 .gallery ul {
-    list-style: none;
+    list-style-type: none;
 }
 
 .gallery ul li {
@@ -151,7 +149,10 @@ header {
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
+}
 
+ul#gallery {
+    padding: 0;
 }
 
 #overlay {
@@ -179,12 +180,7 @@ header {
     100% { opacity: 1;  transform: scale3d(1, 1, 1); }
 }
 
-@keyframes anim-close {
-    0% { opacity: 1; }
-    100% { opacity: 0; transform: scale3d(0.9, 0.9, 1); }
-}
-
-.open-photo, .close-photo {
+.open-photo{
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     -webkit-animation-duration: 0.3s;
@@ -201,13 +197,6 @@ header {
     animation-name: anim-open;
     -webkit-animation-name: anim-open;
     -moz-animation-name: anim-open;
-
-}
-
-.close-photo {
-    animation-name: anim-close;
-    -webkit-animation-name: anim-close;
-    -moz-animation-name: anim-close;
 }
 
 .photo {
@@ -279,18 +268,14 @@ header {
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
 and (min-device-width : 320px) 
-and (max-device-width : 480px) {
+and (max-device-width : 480px)
+{
     .container, .gallery, #overlay {
         height: 100%;
         width: 100%;
     }
     h1, h2 {
         padding: 0 20px;
-    }
-
-    ul#gallery{
-        margin: 0 auto;
-        width: 70%;
     }
 
     #overlay {
@@ -332,15 +317,14 @@ and (max-device-width : 480px) {
 
     }
 
+    body.noscroll{
+        position:fixed;
+        overflow:hidden;
+    }
+
 }
 
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-    .container {
-        width: 80%;
-    }
-}
+
 
 
 
