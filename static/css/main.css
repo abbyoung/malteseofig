@@ -107,7 +107,16 @@ h1, h2, h3 {
     width: 920px;
     margin: 0 auto;
 }
-
+#overlayBackground {
+    height: 100%;
+    width: 100%;
+    background: #000000;
+    opacity: .3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
 header {
     text-align: center;
     margin: 0 auto;
@@ -140,27 +149,43 @@ header {
 }
 
 #overlay {
-    position: fixed;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 25px;
     height: 600px;
-    width: 800px;
+    width: 700px;
     background-color: #ffffff;
     display: none;
     z-index: 1000;
 }
 
-.photo {
-    height: 400px;
+
+.photo img {
     width: 400px;
-    background-color: blue;
+    height: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 
 #prev {
     display: inline-block;
+    float: left;
 }
 
 #next {
     display: inline-block;
+    float: right;
+}
+
+#close {
+    height: 40px;
+    float: right;
+    font-size: 20px;
+    padding: 10px;
 }
 
 

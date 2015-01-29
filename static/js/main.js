@@ -50,6 +50,14 @@ window.onload = function(){
       var fullSize = document.getElementById('fullSize');
       var prev = document.getElementById('prev');
       var next = document.getElementById('next');
+      var close = document.getElementById('close');
+      var overlayBackground = document.getElementById('overlayBackground');
+
+      overlayBackground.onclick = function(){
+        overlay.style.display = 'none';
+        overlayBackground.style.display = 'none';
+
+      };
 
 
 
@@ -88,13 +96,34 @@ window.onload = function(){
         };
 
         // for edge case styles
-        // if index <= zero, disable prev
-        // if index >= json.data.length-1 then disable next
-        // change visibility to hidden 
 
+        // hide prev if at the beginning of the gallery
+        if (index <= 0) {
+          prev.style.display = 'none';
+        }
+        else {
+          prev.style.display = 'inline-block';
+        }
+
+        // hide next if at the end of the gallery
+        if (index >= json.data.length-1) {
+          next.style.display = 'none';
+        }
+        else {
+          next.style.display = 'inline-block';
+        }
+
+        // show standard size photo in gallery
         fullSize.src = json.data[index].images.standard_resolution.url;
         overlay.style.display = 'block';
+        overlayBackground.style.display='block';
 
+        // close button
+        close.onclick = function(e){
+          e.preventDefault();
+          overlay.style.display = 'none';
+          overlayBackground.style.display='none';
+        }
 
       }
 
