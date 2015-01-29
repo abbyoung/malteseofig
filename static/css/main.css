@@ -101,7 +101,7 @@ body {
     background-color: #edeeef;
 }
 h1, h2, h3 {
-    color: #e2e2e2;
+    color: #2f3f43;
 }
 .container {
     width: 920px;
@@ -156,24 +156,28 @@ header {
     right: 0;
     top: 25px;
     height: 600px;
-    width: 700px;
+    width: 750px;
     background-color: #ffffff;
     display: none;
     z-index: 1000;
+    border-radius: 10px 10px 10px 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .photo {
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
     background: url('/static/images/spinner.gif') no-repeat center center;
     background-size: 48px 48px;
-    margin: 0 auto;
+    margin: 40px auto;
 }
 
 .photo img {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto;
+    width: 500px;
+    height: 500px;
     display: block;
 }
 
@@ -181,18 +185,49 @@ header {
 #prev {
     display: inline-block;
     float: left;
+    background: url('/static/images/prevSprite.png') no-repeat center center;
+    background-size: 100px 300px;
+    background-position: 0px 0px;
+    width: 100px;
+    height: 150px;
+    position: absolute;
+    top: 38%;
+    left: 2%;
+    opacity: .3;
+}
+
+#prev:active {
+    background-position: 0px -150px;
 }
 
 #next {
     display: inline-block;
     float: right;
+    background: url('/static/images/nextSprite.png') no-repeat center center;
+    background-size: 100px 300px;
+    background-position: 0px 0px;
+    width: 100px;
+    height: 150px;
+    position: absolute;
+    top: 38%;
+    left: 85%;
+    opacity: .3;
+}
+
+#next:active {
+    background-position: 0px -150px;
 }
 
 #close {
     height: 40px;
+    width: 40px;
     float: right;
     font-size: 20px;
-    padding: 10px;
+    padding: 5px;
+    background: url('/static/images/close@2x.png') no-repeat center center;
+    background-position: 5px 5px;
+    background-size: 30px 30px;
+    opacity: .5;
 }
 
 

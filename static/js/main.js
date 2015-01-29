@@ -129,7 +129,7 @@ window.onload = function(){
         new Gallery(json);
     },
     onTimeout: function(){
-        console.log('timeout!');
+        window.onload; // best way to retry? or just error message?
     },
     timeout: 5
   });
