@@ -41,6 +41,8 @@ Gallery = function(json) {
   self.json = json;
 
   self.overlayBackground.onclick = function(){
+    self.overlay.className = 'close-photo';
+    self.overlayBackground.className = 'close-photo';
     self.overlay.style.display = 'none';
     self.overlayBackground.style.display = 'none';
 
@@ -49,6 +51,8 @@ Gallery = function(json) {
   // close button
   document.getElementById('close').onclick = function(e){
     e.preventDefault();
+    self.overlay.className = 'close-photo';
+    self.overlayBackground.className = 'close-photo';
     self.overlay.style.display = 'none';
     self.overlayBackground.style.display='none';
   };
@@ -77,6 +81,8 @@ Gallery = function(json) {
 
 Gallery.prototype.open = function(index) {
   var self = this;
+
+  self.overlay.className = 'open-photo';
   
   self.prev.onclick = function(e){
     e.preventDefault();
