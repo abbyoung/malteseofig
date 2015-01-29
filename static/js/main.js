@@ -29,112 +29,108 @@ var $jsonp = (function(){
 })();
 
 
+Gallery = function(json) {
+  var self = this;
+
+  self.gallery = document.getElementById('gallery');
+  self.overlay = document.getElementById('overlay');
+  self.fullSize = document.getElementById('fullSize');
+  self.prev = document.getElementById('prev');
+  self.next = document.getElementById('next');
+  self.overlayBackground = document.getElementById('overlayBackground');
+  self.json = json;
+
+  self.overlayBackground.onclick = function(){
+    self.overlay.style.display = 'none';
+    self.overlayBackground.style.display = 'none';
+
+  };
+
+  // close button
+  document.getElementById('close').onclick = function(e){
+    e.preventDefault();
+    self.overlay.style.display = 'none';
+    self.overlayBackground.style.display='none';
+  };
+
+  for (var i=0; i<json.data.length; i++) {
+    var li = document.createElement('li');
+    var img = document.createElement('img');
+    self.gallery.appendChild(li);
+    li.appendChild(img);
+    img.height = self.json.data[i].images.thumbnail.height;
+    img.width = self.json.data[i].images.thumbnail.width;
+
+    // // set img src to thumbnail
+    img.src = self.json.data[i].images.thumbnail.url;
+    // // console.log(json.data[i].caption.from.username);
+    // // console.log(json.data[i].likes.count)
+    (function(index) {
+      li.onclick = function(){
+        self.open(index);
+      };
+    })(i);
+
+  }
+
+};
+
+Gallery.prototype.open = function(index) {
+  var self = this;
+  
+  self.prev.onclick = function(e){
+    e.preventDefault();
+    if (index > 0) {
+     self.open(index-1);
+   }
+
+  };
+
+  self.next.onclick = function(e){
+    e.preventDefault();
+    if (index < self.json.data.length-1) {
+      self.open(index+1);
+    }
+  };
+
+  // for edge case styles
+
+  // hide prev if at the beginning of the gallery
+  if (index <= 0) {
+    self.prev.style.display = 'none';
+  }
+  else {
+    self.prev.style.display = 'inline-block';
+  }
+
+  // hide next if at the end of the gallery
+  if (index >= self.json.data.length-1) {
+    self.next.style.display = 'none';
+  }
+  else {
+    self.next.style.display = 'inline-block';
+  }
+
+  // show standard size photo in gallery
+  self.fullSize.src = "";
+  self.fullSize.src = self.json.data[index].images.standard_resolution.url;
+  self.overlay.style.display = 'block';
+  self.overlayBackground.style.display='block';
+
+
+};
+
 window.onload = function(){
 
   $jsonp.send('https://api.instagram.com/v1/tags/maltese/media/recent?client_id=b565f8e7b5f6473b8aca80b5c9d5de9c&count=20&callback=handleStuff', {
     callbackName: 'handleStuff',
     onSuccess: function(json){
         console.log('success!', json);
-        addPictures(json);
+        new Gallery(json);
     },
     onTimeout: function(){
         console.log('timeout!');
     },
     timeout: 5
   });
-  
-  function addPictures(json) {
-      // adding thumbnails
-      var thumbnails = document.getElementsByTagName('img'); 
-      var gallery = document.getElementById('gallery');
-      var overlay = document.getElementById('overlay');
-      var fullSize = document.getElementById('fullSize');
-      var prev = document.getElementById('prev');
-      var next = document.getElementById('next');
-      var close = document.getElementById('close');
-      var overlayBackground = document.getElementById('overlayBackground');
-
-      overlayBackground.onclick = function(){
-        overlay.style.display = 'none';
-        overlayBackground.style.display = 'none';
-
-      };
-
-      // close button
-      close.onclick = function(e){
-        e.preventDefault();
-        overlay.style.display = 'none';
-        overlayBackground.style.display='none';
-      }
-
-      for (var i=0; i<json.data.length; i++) {
-        var li = document.createElement('li');
-        var img = document.createElement('img');
-        gallery.appendChild(li);
-        li.appendChild(img);
-        img.height = json.data[i].images.thumbnail.height;
-        img.width = json.data[i].images.thumbnail.width;
-
-        // // set img src to thumbnail
-        img.src = json.data[i].images.thumbnail.url;
-        // // console.log(json.data[i].caption.from.username);
-        // // console.log(json.data[i].likes.count)
-        (function(index) {
-          li.onclick = function(){
-            openGallery(index);
-          };
-        })(i);
-
-      }
-
-      function openGallery(index) {
-        prev.onclick = function(e){
-          e.preventDefault();
-          if (index > 0) {
-           openGallery(index-1);
-         }
-
-        };
-
-        next.onclick = function(e){
-          e.preventDefault();
-          if (index < json.data.length-1) {
-            openGallery(index+1);
-          }
-        };
-
-        // for edge case styles
-
-        // hide prev if at the beginning of the gallery
-        if (index <= 0) {
-          prev.style.display = 'none';
-        }
-        else {
-          prev.style.display = 'inline-block';
-        }
-
-        // hide next if at the end of the gallery
-        if (index >= json.data.length-1) {
-          next.style.display = 'none';
-        }
-        else {
-          next.style.display = 'inline-block';
-        }
-
-        // show standard size photo in gallery
-        fullSize.src = "";
-        fullSize.src = json.data[index].images.standard_resolution.url;
-        overlay.style.display = 'block';
-        overlayBackground.style.display='block';
-
-
-      }
-
-
-  };
-
-
-
-
-
-}
+};
