@@ -104,7 +104,7 @@ h1, h2, h3 {
     color: #e2e2e2;
 }
 .container {
-    width: 960px;
+    width: 920px;
     margin: 0 auto;
 }
 
@@ -125,6 +125,7 @@ header {
 .gallery ul li img {
     margin: 10px;
     border: 1px solid #fff;
+    border-radius: 10px 10px 10px 10px;
     transition: all .2s ease-in-out;;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
@@ -138,10 +139,29 @@ header {
 
 }
 
+#overlay {
+    position: fixed;
+    height: 600px;
+    width: 800px;
+    background-color: #ffffff;
+    display: none;
+    z-index: 1000;
+}
+
+.photo {
+    height: 400px;
+    width: 400px;
+    background-color: blue;
+}
 
 
+#prev {
+    display: inline-block;
+}
 
-
+#next {
+    display: inline-block;
+}
 
 
 

@@ -43,20 +43,64 @@ window.onload = function(){
   });
   
   function addPictures(json) {
-    // get containers for photos
-    var photos = document.getElementsByTagName('img'); 
-    for (var i=0; i<20; i++) {
-      photos[i].src = json.data[i].images.thumbnail.url;
-      addClick(photos[i]);
-    }
+    // adding thumbnails
+      var thumbnails = document.getElementsByTagName('img'); 
+      var gallery = document.getElementById('gallery');
+      var overlay = document.getElementById('overlay');
+      var fullSize = document.getElementById('fullSize');
+      var prev = document.getElementById('prev');
+      var next = document.getElementById('next');
+
+
+
+      for (var i=0; i<json.data.length; i++) {
+        var li = document.createElement('li');
+        var img = document.createElement('img');
+        gallery.appendChild(li);
+        li.appendChild(img);
+
+        // // set img src to thumbnail
+        img.src = json.data[i].images.thumbnail.url;
+        // // console.log(json.data[i].caption.from.username);
+        // // console.log(json.data[i].likes.count)
+        (function(index) {
+          li.addEventListener("click", function(){
+            openGallery(index);
+          });
+        })(i);
+
+      }
+
+      function openGallery(index) {
+        prev.onclick = function(e){
+          e.preventDefault();
+          if (index > 0) {
+           openGallery(index-1);
+         }
+
+        };
+
+        next.onclick = function(e){
+          e.preventDefault();
+          if (index < json.data.length-1) {
+            openGallery(index+1);
+          }
+        };
+
+        // for edge case styles
+        // if index <= zero, disable prev
+        // if index >= json.data.length-1 then disable next
+        // change visibility to hidden 
+
+        fullSize.src = json.data[index].images.standard_resolution.url;
+        overlay.style.display = 'block';
+
+
+      }
+
 
   };
 
-  function addClick(photo) {
-    photo.addEventListener("click", function(){
-      console.log('photo been clicked');
-    });
-  }
 
 
 
