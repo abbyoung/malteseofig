@@ -1,34 +1,35 @@
-window.onload = function(){
+var $jsonp = (function(){
+  var that = {};
 
-  var $jsonp = (function(){
-    var that = {};
+  that.send = function(src, options) {
+    var callback_name = options.callbackName || 'callback',
+      on_success = options.onSuccess || function(){},
+      on_timeout = options.onTimeout || function(){},
+      timeout = options.timeout || 10; // sec
 
-    that.send = function(src, options) {
-      var callback_name = options.callbackName || 'callback',
-        on_success = options.onSuccess || function(){},
-        on_timeout = options.onTimeout || function(){},
-        timeout = options.timeout || 10; // sec
+    var timeout_trigger = window.setTimeout(function(){
+      window[callback_name] = function(){};
+      on_timeout();
+    }, timeout * 1000);
 
-      var timeout_trigger = window.setTimeout(function(){
-        window[callback_name] = function(){};
-        on_timeout();
-      }, timeout * 1000);
-
-      window[callback_name] = function(data){
-        window.clearTimeout(timeout_trigger);
-        on_success(data);
-      }
-
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.async = true;
-      script.src = src;
-
-      document.getElementsByTagName('head')[0].appendChild(script);
+    window[callback_name] = function(data){
+      window.clearTimeout(timeout_trigger);
+      on_success(data);
     }
 
-    return that;
-  })();
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = src;
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  return that;
+})();
+
+
+window.onload = function(){
 
   $jsonp.send('https://api.instagram.com/v1/tags/maltese/media/recent?client_id=b565f8e7b5f6473b8aca80b5c9d5de9c&count=20&callback=handleStuff', {
     callbackName: 'handleStuff',
@@ -43,7 +44,7 @@ window.onload = function(){
   });
   
   function addPictures(json) {
-    // adding thumbnails
+      // adding thumbnails
       var thumbnails = document.getElementsByTagName('img'); 
       var gallery = document.getElementById('gallery');
       var overlay = document.getElementById('overlay');
@@ -59,7 +60,12 @@ window.onload = function(){
 
       };
 
-
+      // close button
+      close.onclick = function(e){
+        e.preventDefault();
+        overlay.style.display = 'none';
+        overlayBackground.style.display='none';
+      }
 
       for (var i=0; i<json.data.length; i++) {
         var li = document.createElement('li');
@@ -117,18 +123,10 @@ window.onload = function(){
 
         // show standard size photo in gallery
         fullSize.src = "";
-        fullSize.height = json.data[index].images.standard_resolution.height;
-        fullSize.width = json.data[index].images.standard_resolution.width;
         fullSize.src = json.data[index].images.standard_resolution.url;
         overlay.style.display = 'block';
         overlayBackground.style.display='block';
 
-        // close button
-        close.onclick = function(e){
-          e.preventDefault();
-          overlay.style.display = 'none';
-          overlayBackground.style.display='none';
-        }
 
       }
 
