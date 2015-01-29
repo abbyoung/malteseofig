@@ -72,9 +72,9 @@ window.onload = function(){
         // // console.log(json.data[i].caption.from.username);
         // // console.log(json.data[i].likes.count)
         (function(index) {
-          li.addEventListener("click", function(){
+          li.onclick = function(){
             openGallery(index);
-          });
+          };
         })(i);
 
       }
