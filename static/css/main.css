@@ -162,10 +162,17 @@ header {
     z-index: 1000;
 }
 
+.photo {
+    height: 400px;
+    width: 400px;
+    background: url('/static/images/spinner.gif') no-repeat center center;
+    background-size: 48px 48px;
+    margin: 0 auto;
+}
 
 .photo img {
     width: 400px;
-    height: auto;
+    height: 400px;
     margin: 0 auto;
     display: block;
 }

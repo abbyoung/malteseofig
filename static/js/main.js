@@ -30,7 +30,7 @@ window.onload = function(){
     return that;
   })();
 
-  $jsonp.send('https://api.instagram.com/v1/tags/dogsofig/media/recent?access_token=1747418.b565f8e.92d6a97839ce4f6bb7caaca590b0487a&count=20&callback=handleStuff', {
+  $jsonp.send('https://api.instagram.com/v1/tags/maltese/media/recent?client_id=b565f8e7b5f6473b8aca80b5c9d5de9c&count=20&callback=handleStuff', {
     callbackName: 'handleStuff',
     onSuccess: function(json){
         console.log('success!', json);
@@ -66,6 +66,8 @@ window.onload = function(){
         var img = document.createElement('img');
         gallery.appendChild(li);
         li.appendChild(img);
+        img.height = json.data[i].images.thumbnail.height;
+        img.width = json.data[i].images.thumbnail.width;
 
         // // set img src to thumbnail
         img.src = json.data[i].images.thumbnail.url;
@@ -114,6 +116,9 @@ window.onload = function(){
         }
 
         // show standard size photo in gallery
+        fullSize.src = "";
+        fullSize.height = json.data[index].images.standard_resolution.height;
+        fullSize.width = json.data[index].images.standard_resolution.width;
         fullSize.src = json.data[index].images.standard_resolution.url;
         overlay.style.display = 'block';
         overlayBackground.style.display='block';
