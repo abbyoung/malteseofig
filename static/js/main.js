@@ -38,6 +38,7 @@ Gallery = function(json) {
   self.prev = document.getElementById('prev');
   self.next = document.getElementById('next');
   self.overlayBackground = document.getElementById('overlayBackground');
+  self.caption = document.getElementById('caption');
   self.json = json;
 
   self.overlayBackground.onclick = function(){
@@ -61,7 +62,8 @@ Gallery = function(json) {
 
     // // set img src to thumbnail
     img.src = self.json.data[i].images.thumbnail.url;
-    // // console.log(json.data[i].caption.from.username);
+    console.log(self.json.data[i].caption.from.username);
+    console.log(self.json.data[i].caption.text);
     // // console.log(json.data[i].likes.count)
     (function(index) {
       li.onclick = function(){
@@ -134,7 +136,7 @@ Gallery.prototype.open = function(index) {
   } else {
       self.fullSize.src = preload.src;    
   }
-
+  self.caption.innerHTML = '<a href="http://instagram.com/'+self.json.data[index].caption.from.username+'">' + self.json.data[index].caption.from.username + '</a><br/>' + self.json.data[index].caption.text;
   self.overlay.style.display = 'block';
   self.overlayBackground.style.display='block';
 };

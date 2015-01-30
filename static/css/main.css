@@ -163,7 +163,7 @@ ul#gallery {
     right: 0;
     top: 55px;
     height: 600px;
-    width: 750px;
+    width: 950px;
     background-color: #ffffff;
     display: none;
     z-index: 1000;
@@ -201,7 +201,7 @@ ul#gallery {
 
 .photo {
     height: 500px;
-    width: 500px;
+    width: 700px;
     background: url('/static/images/spinner.gif') no-repeat center center;
     background-size: 48px 48px;
     margin: 40px auto;
@@ -210,7 +210,14 @@ ul#gallery {
 .photo img {
     width: 500px;
     height: 500px;
-    display: block;
+}
+
+p#caption {
+    float: right;
+    width: 160px;
+    font-size: 14px;
+    margin-left: 10px;
+    overflow-wrap: break-word;
 }
 
 
@@ -224,7 +231,7 @@ ul#gallery {
     height: 150px;
     position: absolute;
     top: 38%;
-    left: 2%;
+    left: 1%;
     opacity: .3;
 }
 
@@ -242,7 +249,7 @@ ul#gallery {
     height: 150px;
     position: absolute;
     top: 38%;
-    left: 85%;
+    left: 88%;
     opacity: .3;
 }
 
