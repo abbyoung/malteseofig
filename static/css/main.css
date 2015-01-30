@@ -218,6 +218,7 @@ p#caption {
     font-size: 14px;
     margin-left: 10px;
     overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 
@@ -296,7 +297,10 @@ and (max-device-width : 480px)
         overflow-y: hidden;
     }
 
-
+    p#caption {
+        float: none;
+        margin: 0 auto;
+    }
     .photo {
         height: 300px;
         width: 300px;
@@ -332,7 +336,40 @@ and (max-device-width : 480px)
 }
 
 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+{
+    
+    .photo img {
+        height: 400px;
+        width: 400px;
+    }
 
+    .photo {
+        width: 575px;
+    }
+
+    #overlay {
+        width: 750px;
+    }
+
+    #prev {
+        width: 50px;
+        height: 75px;
+        top: 45%;
+        background-size: 50px 150px;
+    }
+
+    #next {
+        width: 50px;
+        height: 75px;
+        top: 45%;
+        background-size: 50px 150px;
+        left: 92%;
+    }
+
+}
 
 
 

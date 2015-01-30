@@ -136,7 +136,7 @@ Gallery.prototype.open = function(index) {
   } else {
       self.fullSize.src = preload.src;    
   }
-  self.caption.innerHTML = '<a href="http://instagram.com/'+self.json.data[index].caption.from.username+'">' + self.json.data[index].caption.from.username + '</a><br/>' + self.json.data[index].caption.text;
+  self.caption.innerHTML = '<a href="http://instagram.com/'+self.json.data[index].caption.from.username+'" target="_blank">' + '@'+self.json.data[index].caption.from.username + '</a><br/>' + self.json.data[index].caption.text;
   self.overlay.style.display = 'block';
   self.overlayBackground.style.display='block';
 };
